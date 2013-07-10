@@ -40,5 +40,19 @@ module Asana
       Story.all_by_task(:params => { :task_id => self.id })
     end
 
+    def add_tag(tag_id)
+      path = "#{self.id}/addTag"
+      resource = Resource.new({:tag => tag_id})
+      Task.post(path, nil, resource.to_json)
+      self
+    end
+
+    def remove_tag(tag_id)
+      path = "#{self.id}/removeTag"
+      resource = Resource.new({:tag => tag_id})
+      Task.post(path, nil, resource.to_json)
+      self
+    end
+
   end
 end
